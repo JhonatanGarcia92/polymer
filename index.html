@@ -1,0 +1,22 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>polymer-son</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script type="text/javascript">
+        window.Polymer = {
+          dom: 'shadow'
+        };
+    </script>
+    <link rel="import" href="/src/polymer-son-app/polymer-son-app.html">
+    <link rel="import" href="src/my-element/my-element.html">
+</head>
+<body>
+<polymer-son-app></polymer-son-app>
+<my-element primeiro-nome="Luiz Carlos" segundo-nome="Diniz"></my-element>
+</body>
+</html>

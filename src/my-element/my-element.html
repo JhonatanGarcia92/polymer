@@ -1,0 +1,81 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../child-element/child-element.html">
+
+<dom-module id="my-element">
+    <template>
+        <style type="text/css">
+            :host {
+                color: green;
+            }
+        </style>
+
+        <h2>Criando meu elemento separadamente</h2>
+        <span id="teste"></span>
+        <button id="botao">Clique me!</button>
+        <button>Clique me!</button>
+        <button>Clique me!</button>
+        <br/><br/>
+        [[ primeiroNome ]]
+        <br/>
+        [[ segundoNome ]]
+        <br/>
+        [[ nomeCompleto ]]
+        <br/>
+        <a id$="[[ link ]]">Link</a>
+        <input type="text" value="{{ text::input }}"/>
+        [[ text ]]
+        [[ text ]]
+        [[ text ]]
+        [[ text ]]
+        <br/>
+        <child-element text="[[ text ]]"></child-element>
+        <template is="dom-if" if="{{ showClients }}">
+            <ul>
+                <template is="dom-repeat" items="{{ clients }}">
+                    <li>[[ index ]] - {{ item.id }} - {{ item.name }}</li>
+                </template>
+            </ul>
+        </template>
+    </template>
+    <script type="text/javascript">
+        Polymer({
+            is: 'my-element',
+            ready: function () {
+                this.$.teste.innerHTML = this.nomeCompleto;
+            },
+            listeners: {
+                'click': 'handleClick',
+            },
+            properties: {
+                showClients: Boolean,
+                clients: {
+                    type: Array,
+                    value: [
+                        {id: 1, name: "Cliente 1"},
+                        {id: 2, name: "Cliente 2"},
+                        {id: 3, name: "Cliente 3"},
+                        {id: 4, name: "Cliente 4"},
+                    ]
+                },
+                text: String,
+                link: {
+                    type: String,
+                    value: 'http://google.com.br'
+                },
+                primeiroNome: String,
+                segundoNome: String,
+                nomeCompleto: {
+                    type: String,
+                    computed: 'getNomeCompleto(primeiroNome,segundoNome)'
+                }
+            },
+            getNomeCompleto: function (primeiroNome, segundoNome) {
+                return primeiroNome + ' ' + segundoNome
+            },
+            handleClick: function (e) {
+                this.showClients = !this.showClients;
+                console.log(e);
+            }
+        });
+    </script>
+</dom-module>
